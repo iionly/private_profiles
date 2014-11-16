@@ -3,7 +3,7 @@
 	<name>Private Profiles</name>
 	<id>private_profiles</id>
 	<author>iionly</author>
-	<version>1.9.2</version>
+	<version>1.9.3</version>
 	<category>security</category>
 	<description>Configure access to profile pages and permission to send private messages (side-wide configuration or optionally configurable by each user separately).</description>
 	<website>https://github.com/iionly</website>

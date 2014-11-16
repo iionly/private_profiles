@@ -1,5 +1,5 @@
 Private Profiles for Elgg 1.9
-Latest Version: 1.9.2
+Latest Version: 1.9.3
 Released: 2014-11-16
 Contact: iionly@gmx.de
 License: GNU General Public License version 2
@@ -20,6 +20,8 @@ Keep in mind that the limitation of access to profile pages and sending of priva
 
 Installation:
 
+(0. If you have a previous version of the Private Profiles plugin installed, disable the plugin, then remove the plugin's folder from the mod directory before installing the new version,)
+
 1. copy the private_profiles folder into the mod folder of your site,
 
 2. enable the plugin in the admin section of your site,
@@ -28,6 +30,14 @@ Installation:
 
 
 Changelog:
+
+1.9.3:
+
+* Version 1.8.3 updated for Elgg 1.9.
+
+1.8.3:
+
+* Fixed: fatal error if messages sending is set to friends only and a logged-out user opens the hover menu.
 
 1.9.2:
 
