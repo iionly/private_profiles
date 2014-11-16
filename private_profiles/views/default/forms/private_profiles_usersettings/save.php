@@ -87,7 +87,7 @@ if ($custom_access_setting == 'no') {
 				'friends' => elgg_echo('private_profiles:user_messages_setting_friends'),
 				'yes' => elgg_echo('private_profiles:user_messages_setting_yes'),
 			),
-			'value' => $user_access_setting,
+			'value' => $user_messages_setting,
 		));
 	?>
 </div>
