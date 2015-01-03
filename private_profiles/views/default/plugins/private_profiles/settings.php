@@ -31,9 +31,10 @@ if (!$custom_access_setting) {
 		echo elgg_view('input/select', array(
 			'name' => 'params[default_access_setting]',
 			'options_values' => array(
-				'no' => elgg_echo('private_profiles:default_access_no'),
-				'friends' => elgg_echo('private_profiles:default_access_friends'),
 				'yes' => elgg_echo('private_profiles:default_access_yes'),
+				'members' => elgg_echo('private_profiles:default_access_members'),
+				'friends' => elgg_echo('private_profiles:default_access_friends'),
+				'no' => elgg_echo('private_profiles:default_access_no'),
 			),
 			'value' => $default_access_setting,
 		));
@@ -45,9 +46,9 @@ if (!$custom_access_setting) {
 		echo elgg_view('input/select', array(
 			'name' => 'params[default_messages_setting]',
 			'options_values' => array(
-				'no' => elgg_echo('private_profiles:default_messages_no'),
-				'friends' => elgg_echo('private_profiles:default_messages_friends'),
 				'yes' => elgg_echo('private_profiles:default_messages_yes'),
+				'friends' => elgg_echo('private_profiles:default_messages_friends'),
+				'no' => elgg_echo('private_profiles:default_messages_no'),
 			),
 			'value' => $default_messages_setting,
 		));

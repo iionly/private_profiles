@@ -67,7 +67,7 @@ function private_profiles_router($hook, $type, $result, $params) {
 			$default_access_setting = 'no';
 		}
 
-		// Access allowed by default? Additionally, admins are allowed to visit all profiles
+		// Access allowed by default to everyone?
 		if ($default_access_setting == 'yes') {
 			return $result;
 		}
@@ -76,18 +76,26 @@ function private_profiles_router($hook, $type, $result, $params) {
 		$page = array_pad($page, 4, "");
 
 		if (isset($page[0])) {
-
 			$username = $page[0];
 			$user = get_user_by_username($username);
-		
-			if ($default_access_setting == 'no') {
-				if (($logged_in_user_guid = elgg_get_logged_in_user_guid()) && ($logged_in_user_guid == $user->getGUID())) {
-					return $result;
+			if ($user) {
+				if ($logged_in_user_guid = elgg_get_logged_in_user_guid()) {
+					if ($default_access_setting == 'members') {
+						return $result;
+					} else if ($default_access_setting == 'friends') {
+						if (($logged_in_user_guid == $user->getGUID()) || (elgg_get_logged_in_user_entity()->isFriendOf($user->getGUID()))) {
+							return $result;
+						}
+					} else if ($default_access_setting == 'no') {
+						if ($logged_in_user_guid == $user->getGUID()) {
+							return $result;
+						}
+					}
 				}
-			} else if ($default_access_setting == 'friends') {
-				if (($logged_in_user_guid = elgg_get_logged_in_user_guid()) && (($logged_in_user_guid == $user->getGUID()) || (elgg_get_logged_in_user_entity()->isFriendOf($user->getGUID())))) {
-					return $result;
-				}
+			} else {
+				register_error(elgg_echo('private_profiles:invalid_username'));
+				forward(REFERER);
+				return false;
 			}
 		}
 
@@ -97,32 +105,41 @@ function private_profiles_router($hook, $type, $result, $params) {
 		$page = array_pad($page, 4, "");
 
 		if (isset($page[0])) {
-
 			$username = $page[0];
 			$user = get_user_by_username($username);
-
-			// Does the user who owns the profile page allows other users to visit the page?
-			$user_access_setting = elgg_get_plugin_user_setting('user_access_setting', $user->getGUID(), 'private_profiles');
-			if (!$user_access_setting) {
-				$default_access_setting = elgg_get_plugin_setting('default_access_setting', 'private_profiles');
-				if (!$default_access_setting) {
-					$default_access_setting = 'no';
+			if ($user) {
+				// Does the user who owns the profile page allows other users to visit the page?
+				$user_access_setting = elgg_get_plugin_user_setting('user_access_setting', $user->getGUID(), 'private_profiles');
+				if (!$user_access_setting) {
+					$default_access_setting = elgg_get_plugin_setting('default_access_setting', 'private_profiles');
+					if (!$default_access_setting) {
+						$default_access_setting = 'no';
+					}
+					$user_access_setting = $default_access_setting;
 				}
-				$user_access_setting = $default_access_setting;
-			}
 
-			if ($logged_in_user_guid = elgg_get_logged_in_user_guid()) {
+				// Access allowed by user to everyone?
 				if ($user_access_setting == 'yes') {
 					return $result;
-				} else if ($user_access_setting == 'no') {
-					if ($logged_in_user_guid == $user->getGUID()) {
+				}
+
+				if ($logged_in_user_guid = elgg_get_logged_in_user_guid()) {
+					if ($user_access_setting == 'members') {
 						return $result;
-					}
-				} else if ($user_access_setting == 'friends') {
-					if (($logged_in_user_guid == $user->getGUID()) || (elgg_get_logged_in_user_entity()->isFriendOf($user->getGUID()))) {
-						return $result;
+					} else if ($user_access_setting == 'friends') {
+						if (($logged_in_user_guid == $user->getGUID()) || (elgg_get_logged_in_user_entity()->isFriendOf($user->getGUID()))) {
+							return $result;
+						}
+					} else if ($user_access_setting == 'no') {
+						if ($logged_in_user_guid == $user->getGUID()) {
+							return $result;
+						}
 					}
 				}
+			} else {
+				register_error(elgg_echo('private_profiles:invalid_username'));
+				forward(REFERER);
+				return false;
 			}
 		}
 	}

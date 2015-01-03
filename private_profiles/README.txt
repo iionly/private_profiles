@@ -1,14 +1,14 @@
 Private Profiles for Elgg 1.9
-Latest Version: 1.9.4
-Released: 2014-11-16
+Latest Version: 1.9.5
+Released: 2015-01-02
 Contact: iionly@gmx.de
 License: GNU General Public License version 2
-Copyright: (C) iionly 2014
+Copyright: (C) iionly 2014-2015
 
 
 This plugin allows to restrict the access to profile pages and to restrict usage of private messages. There are side-wide plugin settings available and optionally users can configure the restrictions on their own (default is to allow users to configure their own preferences).
 
-Access to profile pages can be limited to the user's own profile page (default), profile pages of users who made the user their friend or the profile page access can be made unrestricted.
+Access to profile pages can be limited to the user's own profile page (default), profile pages of users who made the user their friend, restrict accessing profile pages if the user is logged-in or the profile page access can be made unrestricted.
 
 The sending of private messages to other users can be disabled, can be limited to users who made a user their friend (default) or there are no restrictions regarding who a user can send a private message to. If a user has not yet configured any personal preferences the side-wide settings are used instead.
 
@@ -30,6 +30,20 @@ Installation:
 
 
 Changelog:
+
+1.9.5:
+
+* Version 1.8.5 updated for Elgg 1.9.
+
+1.8.5:
+
+* Added option (both in site-wide and user-specific settings) to allow access to profile pages also to anonymous visitors (i.e. people not logged-in),
+* Fixed occurance of fatal error if someone tries to access a non-existing profile page (invalid username). Displaying of an error message instead,
+* Consistent order of dropdown menu options and options text in site-wide and user-specific settings.
+
+1.8.4.1:
+
+* Fixed: privacy setting "Friends" not correctly handled for message option in hover menu and sending of messages.
 
 1.9.4:
 

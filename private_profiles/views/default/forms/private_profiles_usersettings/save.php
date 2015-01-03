@@ -17,13 +17,16 @@ if ($custom_access_setting == 'no') {
 		if (!$default_access_setting) {
 			$default_access_setting = 'no';
 		}
-		if ($default_access_setting == 'no') {
-			echo elgg_echo('private_profiles:default_access_setting:current_no');
-		} else if ($default_access_setting == 'yes') {
+		if ($default_access_setting == 'yes') {
 			echo elgg_echo('private_profiles:default_access_setting:current_yes');
-		} else {
+		} else if ($default_access_setting == 'members') {
+			echo elgg_echo('private_profiles:default_access_setting:current_members');
+		} else if ($default_access_setting == 'friends') {
 			echo elgg_echo('private_profiles:default_access_setting:current_friends');
+		} else {
+			echo elgg_echo('private_profiles:default_access_setting:current_no');
 		}
+
 	?>
 </div>
 <div class='mbm'>
@@ -33,10 +36,10 @@ if ($custom_access_setting == 'no') {
 		if (!$default_messages_setting) {
 			$default_messages_setting = 'friends';
 		}
-		if ($default_messages_setting == 'no') {
-			echo elgg_echo('private_profiles:default_messages_setting:current_no');
-		} else if ($default_messages_setting == 'yes') {
+		if ($default_messages_setting == 'yes') {
 			echo elgg_echo('private_profiles:default_messages_setting:current_yes');
+		} else if ($default_messages_setting == 'no') {
+			echo elgg_echo('private_profiles:default_messages_setting:current_no');
 		} else {
 			echo elgg_echo('private_profiles:default_messages_setting:current_friends');
 		}
@@ -69,9 +72,10 @@ if ($custom_access_setting == 'no') {
 		echo elgg_view('input/select', array(
 			'name' => 'params[user_access_setting]',
 			'options_values' => array(
-				'no' => elgg_echo('private_profiles:user_access_setting_no'),
-				'friends' => elgg_echo('private_profiles:user_access_setting_friends'),
 				'yes' => elgg_echo('private_profiles:user_access_setting_yes'),
+				'members' => elgg_echo('private_profiles:user_access_setting_members'),
+				'friends' => elgg_echo('private_profiles:user_access_setting_friends'),
+				'no' => elgg_echo('private_profiles:user_access_setting_no'),
 			),
 			'value' => $user_access_setting,
 		));
@@ -83,9 +87,9 @@ if ($custom_access_setting == 'no') {
 		echo elgg_view('input/select', array(
 			'name' => 'params[user_messages_setting]',
 			'options_values' => array(
-				'no' => elgg_echo('private_profiles:user_messages_setting_no'),
-				'friends' => elgg_echo('private_profiles:user_messages_setting_friends'),
 				'yes' => elgg_echo('private_profiles:user_messages_setting_yes'),
+				'friends' => elgg_echo('private_profiles:user_messages_setting_friends'),
+				'no' => elgg_echo('private_profiles:user_messages_setting_no'),
 			),
 			'value' => $user_messages_setting,
 		));
