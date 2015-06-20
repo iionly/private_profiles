@@ -17,7 +17,7 @@ function private_profiles_init() {
 
 	elgg_register_page_handler('private_profiles', 'private_profiles_page_handler');
 
-	elgg_register_event_handler('pagesetup', 'system', 'private_profiles_pagesetup');
+	elgg_register_plugin_hook_handler('register', 'menu:page', 'private_profiles_usersettings_page');
 
 	elgg_register_plugin_hook_handler('action', 'messages/send', 'private_profiles_pm_intercept');
 
@@ -206,7 +206,7 @@ function private_profiles_user_hover_menu($hook, $type, $menu, $params) {
 	return $menu;
 }
 
-function private_profiles_pagesetup() {
+function private_profiles_usersettings_page($hook, $type, $return, $params) {
 	if (elgg_get_context() == "settings" && elgg_get_logged_in_user_guid()) {
 
 		$user = elgg_get_page_owner_entity();
@@ -214,13 +214,11 @@ function private_profiles_pagesetup() {
 			$user = elgg_get_logged_in_user_entity();
 		}
 
-		$params = array(
-			'name' => 'private_profiles_usersettings',
-			'text' => elgg_echo('private_profiles:usersettings'),
-			'href' => "private_profiles/usersettings/{$user->username}",
-		);
-		elgg_register_menu_item('page', $params);
+		$item = new ElggMenuItem('private_profiles_usersettings', elgg_echo('private_profiles:usersettings'), "private_profiles/usersettings/{$user->username}");
+		$return[] = $item;
 	}
+
+	return $return;
 }
 
 function private_profiles_pm_intercept($hook, $type, $result, $params) {
