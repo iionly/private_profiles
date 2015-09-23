@@ -1,0 +1,24 @@
+{
+    "name": "iionly/private_profiles",
+    "description": "Configure access to profile pages and permission to send private messages (site-wide configuration or optionally configurable by each user separately).",
+    "type": "elgg-plugin",
+    "keywords": [
+        "elgg",
+        "plugin"
+    ],
+    "homepage": "https://github.com/iionly/private_profiles",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "iionly",
+            "homepage": "https://github.com/iionly",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+            "issues": "https://github.com/iionly/private_profiles/issues"
+    },
+    "require": {
+        "composer/installers": ">=1.0.8"
+    }
+}
