@@ -20,16 +20,19 @@ elgg_register_plugin_hook_handler('route:rewrite', 'settings', [Router::class, '
  */
 function private_profiles_init() {
 
+	// Profile
 	elgg_register_plugin_hook_handler('route', 'profile', [Router::class, 'routeProfile']);
 	elgg_register_page_handler('private_profiles', [Router::class, 'handlePrivateProfiles']);
-	
-	elgg_register_plugin_hook_handler('register', 'menu:user_hover', 'private_profiles_user_hover_menu');
 
-	elgg_register_plugin_hook_handler('register', 'menu:page', 'private_profiles_usersettings_page');
+	elgg_register_plugin_hook_handler('register', 'menu:page', [Elgg\PrivateProfiles\Menus::class, 'setupPageMenu']);
+
+	elgg_register_action('private_profiles_usersettings/save', elgg_get_plugins_path() . 'private_profiles/actions/save.php');
+
+	// Messages
+	elgg_register_plugin_hook_handler('register', 'menu:user_hover', 'private_profiles_user_hover_menu');
 
 	elgg_register_plugin_hook_handler('action', 'messages/send', 'private_profiles_pm_intercept');
 
-	elgg_register_action('private_profiles_usersettings/save', elgg_get_plugins_path() . 'private_profiles/actions/save.php');
 }
 
 function private_profiles_user_hover_menu($hook, $type, $menu, $params) {
@@ -88,20 +91,6 @@ function private_profiles_user_hover_menu($hook, $type, $menu, $params) {
 	return $menu;
 }
 
-function private_profiles_usersettings_page($hook, $type, $return, $params) {
-	if (elgg_get_context() == "settings" && elgg_get_logged_in_user_guid()) {
-
-		$user = elgg_get_page_owner_entity();
-		if (!$user) {
-			$user = elgg_get_logged_in_user_entity();
-		}
-
-		$item = new ElggMenuItem('private_profiles_usersettings', elgg_echo('private_profiles:usersettings'), "settings/privacy/{$user->username}");
-		$return[] = $item;
-	}
-
-	return $return;
-}
 
 function private_profiles_pm_intercept($hook, $type, $result, $params) {
 	$subject = strip_tags(get_input('subject'));
