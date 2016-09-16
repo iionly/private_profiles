@@ -23,7 +23,7 @@ elgg_register_plugin_hook_handler('route:rewrite', 'settings', [Router::class, '
 function private_profiles_init() {
 
 	// Profile
-	elgg_register_plugin_hook_handler('route', 'profile', [Router::class, 'routeProfile']);
+	elgg_register_plugin_hook_handler('route', 'profile', [Router::class, 'routeProfile'], 100);
 	elgg_register_page_handler('private_profiles', [Router::class, 'handlePrivateProfiles']);
 
 	elgg_register_plugin_hook_handler('register', 'menu:page', [Menus::class, 'setupPageMenu']);
