@@ -164,4 +164,51 @@ class Access {
 		}
 	}
 
+	/**
+	 * Hide user activity and membership listing according to settings
+	 *
+	 * @param string $hook   "get_sql"
+	 * @param string $type   "access"
+	 * @param array  $return Access SQL queries
+	 * @param array  $params Hook params
+	 * @return array
+	 */
+	public static function applyActivityPrivacy($hook, $type, $return, $params) {
+
+		if (elgg_in_context('action')) {
+			// let actions such as /login run without hinderance
+			return;
+		}
+
+		$user_guid = elgg_extract('user_guid', $params);
+		if ($user_guid) {
+			// activity privacy setting only applies to logged out users
+			return;
+		}
+
+		if (elgg_extract('ignore_access', $params)) {
+			return;
+		}
+
+		$dbprefix = elgg_get_config('dbprefix');
+		$table_alias = $params['table_alias'] ? $params['table_alias'] . '.' : '';
+
+		$guid_column = elgg_extract('guid_column', $params, 'guid');
+		$owner_guid_column = elgg_extract('owner_guid_column', $params, 'owner_guid');
+
+		// Exclude entities owned by users who have chosen to keep their activity to members only
+		$value = self::ACCESS_LOGGED_IN;
+		$return['ands'][] = "
+			NOT EXISTS (
+				SELECT 1 FROM {$dbprefix}private_settings
+					WHERE
+						entity_guid IN ({$table_alias}{$guid_column}, {$table_alias}{$owner_guid_column})
+						AND name = 'plugin:user_setting:private_profiles:user_activity_setting'
+						AND value = '$value'
+			)
+		";
+
+		return $return;
+	}
+
 }

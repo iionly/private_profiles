@@ -42,5 +42,8 @@ return array(
 	'private_profiles:usersettings' => 'Privacy',
 	'private_profiles:usersettings:save:success' => 'Your privacy settings were saved successfully.',
 	'private_profiles:usersettings:save:error' => 'There was an error saving your privacy settings.',
-	'private_profiles:sending_denied' => 'You are not allowed to send a message to this member due to the privacy settings.'
+	'private_profiles:sending_denied' => 'You are not allowed to send a message to this member due to the privacy settings.',
+	'private_profiles:user_activity_setting' => 'Who can see my public activity and membership listing?',
+	'private_profiles:user_activity_setting_yes' => 'Everyone',
+	'private_profiles:user_activity_setting_members' => 'Members only',
 );

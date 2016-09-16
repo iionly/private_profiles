@@ -35,4 +35,7 @@ function private_profiles_init() {
 		elgg_register_plugin_hook_handler('register', 'menu:user_hover', [Menus::class, 'setupUserHoverMenu']);
 		elgg_register_plugin_hook_handler('action', 'messages/send', [Access::class, 'interceptPrivateMessage']);
 	}
+
+	// Public activity/members page
+	elgg_register_plugin_hook_handler('get_sql', 'access', [Access::class, 'applyActivityPrivacy']);
 }
