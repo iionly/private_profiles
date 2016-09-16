@@ -7,7 +7,7 @@ class Access {
 	const ACCESS_PUBLIC = 'yes';
 	const ACCESS_PRIVATE = 'no';
 	const ACCESS_FRIENDS = 'friends';
-	const ACESSS_LOGGED_IN = 'members';
+	const ACCESS_LOGGED_IN = 'members';
 
 	/**
 	 * Check if the viewer has permissions to access user profile
@@ -95,8 +95,6 @@ class Access {
 				return $recipient->guid == $sender->guid;
 
 			case self::ACCESS_PUBLIC :
-				return true;
-
 			case self::ACCESS_LOGGED_IN :
 				return ($sender);
 

@@ -28,7 +28,7 @@ function private_profiles_init() {
 
 	elgg_register_plugin_hook_handler('register', 'menu:page', [Menus::class, 'setupPageMenu']);
 
-	elgg_register_action('private_profiles_usersettings/save', elgg_get_plugins_path() . 'private_profiles/actions/save.php');
+	elgg_register_action('private_profiles_usersettings/save', __DIR__ . '/actions/save.php');
 
 	// Messages
 	if (elgg_is_active_plugin('messages')) {
