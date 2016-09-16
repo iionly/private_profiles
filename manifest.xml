@@ -3,7 +3,7 @@
 	<name>Private Profiles</name>
 	<id>private_profiles</id>
 	<author>iionly</author>
-	<version>1.9.7</version>
+	<version>2.2.0</version>
 	<category>security</category>
 	<description>Configure access to profile pages and permission to send private messages (site-wide configuration or optionally configurable by each user separately).</description>
 	<website>https://github.com/iionly</website>
@@ -11,7 +11,7 @@
 	<license>GNU Public License version 2</license>
 	<requires>
 		<type>elgg_release</type>
-		<version>1.9</version>
+		<version>2.2</version>
 	</requires>
 	<suggests>
 		<type>plugin</type>
