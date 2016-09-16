@@ -15,6 +15,6 @@
 	</requires>
 	<suggests>
 		<type>plugin</type>
-		<name>friend_request</name>
+		<name>messages</name>
 	</suggests>
 </plugin_manifest>
