@@ -2,6 +2,8 @@
 
 namespace Elgg\PrivateProfiles;
 
+use ElggUser;
+
 class Access {
 
 	const ACCESS_PUBLIC = 'yes';
@@ -24,6 +26,10 @@ class Access {
 			return true;
 		}
 
+		if ($user->canEdit($viewer->guid)) {
+			return true;
+		}
+		
 		$access_setting = self::getAccessSetting($user);
 
 		switch ($access_setting) {
@@ -84,6 +90,10 @@ class Access {
 		}
 
 		if (elgg_check_access_overrides($sender->guid)) {
+			return true;
+		}
+
+		if ($recipient->canEdit($sender->guid)) {
 			return true;
 		}
 
