@@ -6,7 +6,7 @@ class Router {
 
 	/**
 	 * Route /profile pages
-	 * 
+	 *
 	 * @param string $hook   "route"
 	 * @param string $type   "profile"
 	 * @param mixed  $return Route
@@ -25,12 +25,14 @@ class Router {
 
 		if (!$user) {
 			register_error(elgg_echo('private_profiles:invalid_username'));
-			forward(REFERRER, '404');
+			forward(REFERER);
+			return false;
 		}
 
 		if (!Access::hasAccessToProfile($user)) {
 			register_error(elgg_echo('private_profiles:access_denied'));
-			forward(REFERRER, '403');
+			forward(REFERER);
+			return false;
 		}
 	}
 
@@ -66,8 +68,8 @@ class Router {
 	}
 
 	/**
-	 * Handle /profile_profiles page
-	 * 
+	 * Handle /private_profiles page
+	 *
 	 * @param array $segments URL segments
 	 * @return bool
 	 */

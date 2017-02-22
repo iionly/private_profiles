@@ -8,7 +8,7 @@ class Menus {
 
 	/**
 	 * Setup page menu
-	 * 
+	 *
 	 * @param string         $hook   "register"
 	 * @param string         $type   "menu:page"
 	 * @param ElggMenuItem[] $return Menu

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Private Profiles plugin for Elgg 2.2 and newer
+ * Private Profiles plugin
  * 
  * @package private_profiles
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
@@ -15,6 +15,7 @@ use Elgg\PrivateProfiles\Router;
 
 elgg_register_event_handler('init', 'system', 'private_profiles_init');
 elgg_register_plugin_hook_handler('route:rewrite', 'settings', [Router::class, 'rewriteSettingsRoute']);
+elgg_register_plugin_hook_handler('route:rewrite', 'profile', [Router::class, 'routeProfile'], 100);
 
 /**
  * Initialize
@@ -23,7 +24,6 @@ elgg_register_plugin_hook_handler('route:rewrite', 'settings', [Router::class, '
 function private_profiles_init() {
 
 	// Profile
-	elgg_register_plugin_hook_handler('route', 'profile', [Router::class, 'routeProfile'], 100);
 	elgg_register_page_handler('private_profiles', [Router::class, 'handlePrivateProfiles']);
 
 	elgg_register_plugin_hook_handler('register', 'menu:page', [Menus::class, 'setupPageMenu']);

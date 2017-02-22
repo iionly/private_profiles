@@ -13,7 +13,7 @@ class Access {
 
 	/**
 	 * Check if the viewer has permissions to access user profile
-	 * 
+	 *
 	 * @param ElggUser $user   Profile owner
 	 * @param ElggUser $viewer Viewer (default to logged in user)
 	 */
@@ -170,7 +170,7 @@ class Access {
 
 		if ($error) {
 			register_error(elgg_echo('private_profiles:sending_denied'));
-			forward(REFERRER);
+			forward(REFERER);
 		}
 	}
 

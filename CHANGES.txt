@@ -1,6 +1,15 @@
 Changelog
 =========
 
+2.3.0
+-----
+
+Update provide by Ismayil Khayredinov and sponsored by Bodyology Massage School Virtual Campus (http://bodyologymassagecourses.co.uk/forum).
+
+- Minimum Elgg version required is now Elgg 2.3,
+- Major plugin code rewrite,
+- New feature: users can choose to hide their public activity and membership listing from logged out users (this user setting option is hidden on walled garden Elgg sites - either when the core walled garden option is enabled or the Loginrequired plugin is used - as it's unnecessary then).
+
 1.9.7
 -----
 

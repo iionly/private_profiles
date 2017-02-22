@@ -1,6 +1,6 @@
 {
     "name": "iionly/private_profiles",
-    "description": "Configure access to profile pages and permission to send private messages (site-wide configuration or optionally configurable by each user separately).",
+    "description": "Configure access to profile pages and permission to send private messages (site-wide configuration or optionally configurable by each user separately) and users can choose to hide their public activity and membership listing from logged out users (this user setting is hidden on walled garden Elgg sites as it's not necessary anyway).",
     "type": "elgg-plugin",
     "keywords": [
         "elgg",
