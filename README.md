@@ -1,8 +1,8 @@
-Private Profiles for Elgg 2.3 and newer Elgg 2.X
+Private Profiles for Elgg 3.0 and newer Elgg 3.X
 ================================================
 
-Latest Version: 2.3.0  
-Released: 2017-02-21  
+Latest Version: 3.0.0  
+Released: 2021-09-15  
 Contact: iionly@gmx.de  
 License: GNU General Public License version 2  
 Copyright: (C) iionly 2014, Ismayil Khayredinov 2016
@@ -19,7 +19,7 @@ The sending of private messages to other users can be disabled, can be limited t
 
 Independent of the plugin settings an admin can still access all profile pages in any case and can send and receive private messages to and from all users.
 
-Keep in mind that the limitation of access to profile pages and sending of private messages with the "Friends only" option selected does NOT mean that a user can bypass these limitations by simply friending another user. It's the OTHER user who has to friend the user first before the "Friends only" condition is fullfilled. Best would be to also use the "Friend request" plugin to have real two-way friend relationships where friend requests can be accepted or denied right away to make it less confusing for a user to understand who he is friends with.
+Keep in mind that the limitation of access to profile pages and sending of private messages with the "Friends only" option selected does NOT mean that a user can bypass these limitations by simply friending another user. It's the OTHER user who has to friend the user first before the "Friends only" condition is fullfilled. Best would be to also use the "Friend request" (REMARK: seems not updated for Elgg 3 but since Elgg 3.3 its functionality is included in the bundled Elgg core "Friends" plugin) plugin to have real two-way friend relationships where friend requests can be accepted or denied right away to make it less confusing for a user to understand who he is friends with.
 
 Since version 2.3 of the Private Profiles plugin users can hide their public activity and the membership listing of their account from logged-out visitors. This corresponding user setting is only available if the Elgg site is not in walled garden mode (either by using the Elgg core walled garden option or by using the Loginrequired plugin) as in this case the activity and membership listing is hidden anyway from any logged-out visitor.
 

@@ -5,7 +5,7 @@
  * English language file
  */
 
-return array(
+return [
 	'private_profiles:default_access_setting:label' => 'Profile page access?',
 	'private_profiles:default_access_setting' => '(Should by default the access to profile pages of community members be unrestricted, restricted to logged-in members of the site, restricted to friends of the member or restricted to the member (and admins) only?)',
 	'private_profiles:default_access_yes' => 'Unrestricted',
@@ -40,10 +40,8 @@ return array(
 	'private_profiles:access_denied' => 'You are not allowed to view the profile page of this member.',
 	'private_profiles:invalid_username' => 'There\'s no member with this name.',
 	'private_profiles:usersettings' => 'Privacy',
-	'private_profiles:usersettings:save:success' => 'Your privacy settings were saved successfully.',
-	'private_profiles:usersettings:save:error' => 'There was an error saving your privacy settings.',
 	'private_profiles:sending_denied' => 'You are not allowed to send a message to this member due to the privacy settings.',
 	'private_profiles:user_activity_setting' => 'Who should be able to see your public activity and membership listing?',
 	'private_profiles:user_activity_setting_yes' => 'Everyone',
 	'private_profiles:user_activity_setting_members' => 'Logged-in members only',
-);
+];

@@ -22,7 +22,7 @@ $title = elgg_echo('private_profiles:usersettings');
 elgg_push_breadcrumb(elgg_echo('settings'), "settings/user/$user->username");
 elgg_push_breadcrumb($title);
 
-$content = elgg_view_form('private_profiles_usersettings/save', [], [
+$content = elgg_view_form('private_profiles/usersettings_save', [], [
 	'user' => $user,
 ]);
 
@@ -32,6 +32,6 @@ $params = array(
 	'filter' => '',
 );
 
-$layout = elgg_view_layout('content', $params);
+$layout = elgg_view_layout('default', $params);
 
 echo elgg_view_page($title, $layout);

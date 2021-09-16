@@ -9,10 +9,10 @@ if (!$user || !$user->canEdit()) {
 
 $fields = [];
 
-$custom_access_setting = elgg_get_plugin_setting('custom_access_setting', 'private_profiles', 'yes');
+$custom_access_setting = elgg_get_plugin_setting('custom_access_setting', 'private_profiles');
 
-$default_access_setting = elgg_get_plugin_setting('default_access_setting', 'private_profiles', Access::ACCESS_PRIVATE);
-$default_messages_setting = elgg_get_plugin_setting('default_messages_setting', 'private_profiles', Access::ACCESS_FRIENDS);
+$default_access_setting = elgg_get_plugin_setting('default_access_setting', 'private_profiles');
+$default_messages_setting = elgg_get_plugin_setting('default_messages_setting', 'private_profiles');
 
 if ($custom_access_setting == 'no') {
 

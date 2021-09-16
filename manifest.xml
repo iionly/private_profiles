@@ -3,7 +3,7 @@
 	<name>Private Profiles</name>
 	<id>private_profiles</id>
 	<author>iionly, Ismayil Khayredinov</author>
-	<version>2.3.0</version>
+	<version>3.0.0</version>
 	<category>security</category>
 	<description>Configure access to profile pages and permission to send private messages (site-wide configuration or optionally configurable by each user separately) and users can choose to hide their public activity and membership listing from logged out users (this user setting is hidden on walled garden Elgg sites as it's not necessary anyway).</description>
 	<website>https://github.com/iionly</website>
@@ -11,14 +11,10 @@
 	<license>GNU Public License version 2</license>
 	<requires>
 		<type>elgg_release</type>
-		<version>2.3.0</version>
+		<version>3.0.0</version>
 	</requires>
 	<suggests>
 		<type>plugin</type>
 		<name>messages</name>
-	</suggests>
-	<suggests>
-		<type>plugin</type>
-		<name>friend_request</name>
 	</suggests>
 </plugin_manifest>

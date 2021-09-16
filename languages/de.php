@@ -5,7 +5,7 @@
  * German language file
  */
 
-return array(
+return [
 	'private_profiles:default_access_setting:label' => 'Zugang zu Profilseiten?',
 	'private_profiles:default_access_setting' => '(Profilseiten der Mitglieder standardmäßig ohne Beschränkung zugänglich, nur für angemeldete Mitglieder, nur für Freunde des Mitglieds oder nur für das Mitglied (und Administratoren))',
 	'private_profiles:default_access_yes' => 'Keine Beschränkung',
@@ -40,10 +40,8 @@ return array(
 	'private_profiles:access_denied' => 'Die Profilseite dieses Mitglieds ist privat.',
 	'private_profiles:invalid_username' => 'Es gibt kein Mitglied dieses Namens.',
 	'private_profiles:usersettings' => 'Privatsphäre',
-	'private_profiles:usersettings:save:success' => 'Deine Privatsphäreneinstellungen wurden gespeichert.',
-	'private_profiles:usersettings:save:error' => 'Beim Speichern Deiner Privatsphäreneinstellungen ist ein Fehler aufgetreten.',
 	'private_profiles:sending_denied' => 'Das Senden einer Nachricht an dieses Mitglied ist Dir aufgrund der Privatsphäreneinstellungen nicht erlaubt.',
 	'private_profiles:user_activity_setting' => 'Wer soll Deine öffentlichen Aktivitäten und die Auflistung Deines Accounts in der Liste der Mitglieder der Community-Seite sehen dürfen?',
 	'private_profiles:user_activity_setting_yes' => 'Keine Beschränkung',
 	'private_profiles:user_activity_setting_members' => 'Nur angemeldete Mitglieder',
-);
+];

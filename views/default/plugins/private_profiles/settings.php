@@ -18,7 +18,7 @@ echo elgg_view_field([
 		Access::ACCESS_FRIENDS => elgg_echo('private_profiles:default_access_friends'),
 		Access::ACCESS_PRIVATE => elgg_echo('private_profiles:default_access_no'),
 	]),
-	'value' => $entity->default_access_setting ? : Access::ACCESS_PRIVATE,
+	'value' => $entity->default_access_setting,
 	'#label' => elgg_echo('private_profiles:default_access_setting:label'),
 	'#help' => elgg_echo('private_profiles:default_access_setting'),
 ]);
@@ -31,7 +31,7 @@ echo elgg_view_field([
 		Access::ACCESS_FRIENDS => elgg_echo('private_profiles:default_messages_friends'),
 		Access::ACCESS_PRIVATE => elgg_echo('private_profiles:default_messages_no'),
 	]),
-	'value' => $entity->default_messages_setting ? : Access::ACCESS_FRIENDS,
+	'value' => $entity->default_messages_setting,
 	'#label' => elgg_echo('private_profiles:default_messages_setting:label'),
 	'#help' => elgg_echo('private_profiles:default_messages_setting'),
 ]);
@@ -43,7 +43,7 @@ echo elgg_view_field([
 		'yes' => elgg_echo('option:yes'),
 		'no' => elgg_echo('option:no'),
 	]),
-	'value' => $entity->custom_access_setting ? : 'yes',
+	'value' => $entity->custom_access_setting,
 	'#label' => elgg_echo('private_profiles:custom_access_setting:label'),
 	'#help' => elgg_echo('private_profiles:custom_access_setting'),
 ]);

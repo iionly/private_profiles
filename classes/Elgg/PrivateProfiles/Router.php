@@ -7,13 +7,9 @@ class Router {
 	/**
 	 * Route /profile pages
 	 *
-	 * @param string $hook   "route"
-	 * @param string $type   "profile"
-	 * @param mixed  $return Route
-	 * @param array  $params Hook params
-	 * @return mixed
 	 */
-	public static function routeProfile($hook, $type, $return, $params) {
+	public static function routeProfile(\Elgg\Hook $hook) {
+		$return = $hook->getValue();
 		if (!is_array($return)) {
 			return;
 		}
@@ -39,13 +35,9 @@ class Router {
 	/**
 	 * Route /settings/privacy pages
 	 *
-	 * @param string $hook   "route"
-	 * @param string $type   "settings"
-	 * @param mixed  $return Route
-	 * @param array  $params Hook params
-	 * @return mixed
 	 */
-	public static function rewriteSettingsRoute($hook, $type, $return, $params) {
+	public static function rewriteSettingsRoute(\Elgg\Hook $hook) {
+		$return = $hook->getValue();
 		if (!is_array($return)) {
 			return;
 		}

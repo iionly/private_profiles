@@ -9,14 +9,8 @@ class Menus {
 	/**
 	 * Setup page menu
 	 *
-	 * @param string         $hook   "register"
-	 * @param string         $type   "menu:page"
-	 * @param ElggMenuItem[] $return Menu
-	 * @param array          $params Hook params
-	 * @return ElggMenuItem]
 	 */
-	public static function setupPageMenu($hook, $type, $return, $params) {
-
+	public static function setupPageMenu(\Elgg\Hook $hook) {
 		if (!elgg_in_context('settings')) {
 			return;
 		}
@@ -26,45 +20,13 @@ class Menus {
 			return;
 		}
 
-		$return[] = ElggMenuItem::factory([
+		$menu = $hook->getValue();
+		$menu[] = ElggMenuItem::factory([
 			'name' => 'private_profiles_usersettings',
 			'text' => elgg_echo('private_profiles:usersettings'),
 			'href' => "settings/privacy/{$user->username}",
 		]);
 
-		return $return;
+		return $menu;
 	}
-
-	/**
-	 * Setup user hover menu
-	 *
-	 * @param string         $hook   "register"
-	 * @param string         $type   "menu:user_hover"
-	 * @param ElggMenuItem[] $return Menu
-	 * @param array          $params Hook params
-	 * @return ElggMenuItem]
-	 */
-	public static function setupUserHoverMenu($hook, $type, $return, $params) {
-
-		$user = elgg_extract('entity', $params);
-		if (!$user) {
-			return;
-		}
-
-		if (!Access::canSendPrivateMessage($user)) {
-			// Remove send message item if viewer is not allowed 
-			// to send messages to the user
-			$unregister = [
-				'send'
-			];
-			foreach ($return as $key => $item) {
-				if (in_array($item->getName(), $unregister)) {
-					unset($return[$key]);
-				}
-			}
-		}
-
-		return $return;
-	}
-
 }

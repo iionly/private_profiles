@@ -7,7 +7,7 @@
         "plugin"
     ],
     "homepage": "https://github.com/iionly/private_profiles",
-    "license": "GPL-2.0",
+    "license": "GPL-2.0-only",
     "authors": [
         {
             "name": "iionly",

@@ -12,6 +12,24 @@ class Access {
 	const ACCESS_LOGGED_IN = 'members';
 
 	/**
+	 * As elgg_check_access_overrides() was removed in Elgg 3
+	 * we re-implement it here
+	 * 
+	 * @param int $user_guid The user to check against.
+	 * @return bool
+	 */
+	public static function privateprofiles_check_access_overrides($user_guid = 0) {
+		if (!$user_guid || $user_guid <= 0) {
+			$is_admin = false;
+		} else {
+			$user = get_user($user_guid);
+			$is_admin = $user->isAdmin();
+		}
+
+		return ($is_admin || elgg_get_ignore_access());
+	}
+
+	/**
 	 * Check if the viewer has permissions to access user profile
 	 *
 	 * @param ElggUser $user   Profile owner
@@ -22,7 +40,7 @@ class Access {
 			$viewer = elgg_get_logged_in_user_entity();
 		}
 
-		if (elgg_check_access_overrides($viewer->guid)) {
+		if (self::privateprofiles_check_access_overrides($viewer->guid)) {
 			return true;
 		}
 
@@ -79,7 +97,6 @@ class Access {
 	 * @param ElggUser $sender    Sender (default to logged in user)
 	 */
 	public static function canSendPrivateMessage(ElggUser $recipient, ElggUser $sender = null) {
-
 		if (!isset($sender)) {
 			$sender = elgg_get_logged_in_user_entity();
 		}
@@ -89,7 +106,7 @@ class Access {
 			return false;
 		}
 
-		if (elgg_check_access_overrides($sender->guid)) {
+		if (self::privateprofiles_check_access_overrides($sender->guid)) {
 			return true;
 		}
 
@@ -140,13 +157,8 @@ class Access {
 	/**
 	 * Intercept a message being sent to a user without sufficient permissions
 	 *
-	 * @param string $hook   "action"
-	 * @param string $type   "messages/send"
-	 * @param mixed  $return Proceed with action?
-	 * @param array  $params Hook params
-	 * @return mixed
 	 */
-	public static function interceptPrivateMessage($hook, $type, $return, $params) {
+	public static function interceptPrivateMessage(\Elgg\Hook $hook) {
 
 		$recipients = get_input('recipients');
 		$original_msg_guid = (int) get_input('original_guid');
@@ -170,53 +182,49 @@ class Access {
 
 		if ($error) {
 			register_error(elgg_echo('private_profiles:sending_denied'));
+
+			// forward to referrer or else action code sends to front page
 			forward(REFERER);
+
+			return false;
 		}
+		
+		return;
 	}
 
 	/**
 	 * Hide user activity and membership listing according to settings
 	 *
-	 * @param string $hook   "get_sql"
-	 * @param string $type   "access"
-	 * @param array  $return Access SQL queries
-	 * @param array  $params Hook params
 	 * @return array
 	 */
-	public static function applyActivityPrivacy($hook, $type, $return, $params) {
+	public static function applyActivityPrivacy(\Elgg\Hook $hook) {
 
 		if (elgg_in_context('action')) {
 			// let actions such as /login run without hinderance
 			return;
 		}
 
-		$user_guid = elgg_extract('user_guid', $params);
+		$user_guid = $hook->getParam('user_guid');
 		if ($user_guid) {
 			// activity privacy setting only applies to logged out users
 			return;
 		}
 
-		if (elgg_extract('ignore_access', $params)) {
+		if ($hook->getParam('ignore_access')) {
 			return;
 		}
 
 		$dbprefix = elgg_get_config('dbprefix');
-		$table_alias = $params['table_alias'] ? $params['table_alias'] . '.' : '';
+		$table_alias = $hook->getParam('table_alias') ? $hook->getParam('table_alias') . '.' : '';
 
-		$guid_column = elgg_extract('guid_column', $params, 'guid');
-		$owner_guid_column = elgg_extract('owner_guid_column', $params, 'owner_guid');
+		$guid_column = $hook->getParam('guid_column', 'guid');
+		$owner_guid_column = $hook->getParam('owner_guid_column', 'owner_guid');
+		
+		$return = $hook->getValue();
 
 		// Exclude entities owned by users who have chosen to keep their activity to members only
 		$value = self::ACCESS_LOGGED_IN;
-		$return['ands'][] = "
-			NOT EXISTS (
-				SELECT 1 FROM {$dbprefix}private_settings
-					WHERE
-						entity_guid IN ({$table_alias}{$guid_column}, {$table_alias}{$owner_guid_column})
-						AND name = 'plugin:user_setting:private_profiles:user_activity_setting'
-						AND value = '$value'
-			)
-		";
+		$return['ands'][] = "NOT EXISTS (SELECT 1 FROM {$dbprefix}private_settings WHERE entity_guid IN ({$table_alias}{$guid_column}, {$table_alias}{$owner_guid_column}) AND name='plugin:user_setting:private_profiles:user_activity_setting' AND value='$value')";
 
 		return $return;
 	}
